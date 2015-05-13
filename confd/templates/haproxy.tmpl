@@ -32,18 +32,18 @@ defaults
 
 frontend http-in
     bind *:8080
-  
+
     {{range $service := ls "/services"}}
-    
+
     {{$key := printf "/services/%s/domain" $service}}  {{if exists $key}}
     acl host_{{$service}} hdr(host) -i {{getv $key}}
     {{end}}
     {{$key := printf "/services/%s/url_reg" $service}}  {{if exists $key}}
     acl host_{{$service}} url_reg -i {{getv $key}}
-    {{end}}  
+    {{end}}
     acl {{$service}}_health path_beg /ping
     {{end}}
-    
+
     {{range $service := ls "/services"}}
     use_backend {{$service}} if host_{{$service}}
     use_backend {{$service}} if {{$service}}_health
@@ -75,10 +75,10 @@ listen MyStats
     stats refresh 5s
     stats show-node
     stats show-legends
-    
+
     # if authentication is wanted
     acl auth_ok http_auth(stats-auth)
     http-request auth unless auth_ok
- 
+
 userlist stats-auth
     user admin insecure-password p4ss

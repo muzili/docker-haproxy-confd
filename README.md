@@ -2,7 +2,7 @@ haproxy combined with confd for HTTP load balancing
 
 ## Usage
 
-* HAProxy 1.5.x backed by Confd 1.7.0 beta 1
+* HAProxy 1.5.x backed by Confd 0.9.0
 * Uses zero-downtime reconfiguration (e.g - instead of harpy reload, which will drop all connections, will gradually transfer new connections to the new config)
 * Added support for url rexeg (not reggae, damn you spell checker) for routing, in addition to the usual hostname pattern
 * Added validation for existence of keys in backing kv store, to prevent failures
